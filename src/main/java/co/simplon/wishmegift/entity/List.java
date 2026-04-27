@@ -2,7 +2,7 @@ package co.simplon.wishmegift.entity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import org.hibernate.annotations.CreationTimestamp;
+import org.jspecify.annotations.NonNull;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
@@ -50,19 +50,19 @@ public class List {
         return id;
     }
 
-    public String getName() {
+    public @NonNull String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
-    public Theme getTheme() {
+    public @NonNull Theme getTheme() {
         return theme;
     }
 
-    public void setTheme(Theme theme) {
+    public void setTheme(@NonNull Theme theme) {
         this.theme = theme;
     }
 
@@ -82,7 +82,7 @@ public class List {
         return this.EventDate;
     }
 
-    public void setEventDate(java.sql.Time eventDate) {
+    public void setEventDate(java.sql.@NonNull Time eventDate) {
         this.EventDate = eventDate;
     }
 
