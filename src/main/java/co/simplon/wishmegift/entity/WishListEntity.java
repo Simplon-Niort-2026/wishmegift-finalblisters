@@ -4,13 +4,15 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Table(name = "list")
-public class List {
+@EntityListeners(AuditingEntityListener.class)
+@Table(name = "wish_list")
+public class WishListEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,17 +36,17 @@ public class List {
     @Basic
     @Nonnull
     @CreatedDate
-    @Column(name="date", nullable = false)
-    private java.sql.Time CreatedAt;
+    @Column(name="date", nullable = false, updatable = false)
+    private java.sql.Time createdAt;
 
     @Basic
     @Nonnull
     @Column(name="event_date", nullable = false)
-    private java.sql.Time EventDate;
+    private java.sql.Time eventDate;
 
     @Basic
     @Column(name="is_active", columnDefinition = "boolean default true")
-    private Boolean active;
+    private Boolean active = true;
 
     public UUID getId() {
         return id;
@@ -75,15 +77,15 @@ public class List {
     }
 
     public Date getCreatedAt() {
-        return this.CreatedAt;
+        return this.createdAt;
     }
 
     public Date getEventDate() {
-        return this.EventDate;
+        return this.eventDate;
     }
 
     public void setEventDate(java.sql.@NonNull Time eventDate) {
-        this.EventDate = eventDate;
+        this.eventDate = eventDate;
     }
 
     public Boolean isActive() {
