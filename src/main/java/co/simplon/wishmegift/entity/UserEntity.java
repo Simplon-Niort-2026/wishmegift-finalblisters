@@ -2,8 +2,8 @@ package co.simplon.wishmegift.entity;
 
 import co.simplon.wishmegift.service.HasherService;
 import co.simplon.wishmegift.service.RegexService;
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import org.jspecify.annotations.NonNull;
 
 import java.util.UUID;
 
@@ -17,12 +17,13 @@ public class UserEntity {
     private UUID id;
 
     @Basic
-    @NonNull
-    @Column(unique=true)
+    @Nonnull
+    @Column(nullable = false, unique=true)
     private String email;
 
     @Basic
-    @NonNull
+    @Nonnull
+    @Column(nullable = false)
     private String password;
 
     public UserEntity() {}
