@@ -32,6 +32,9 @@ public class Gift {
     @Column(name = "reservedBy", nullable = true)
     private UUID reservedBy;
 
+    public Gift() {
+    }
+
     public UUID getId() {
         return id;
     }
