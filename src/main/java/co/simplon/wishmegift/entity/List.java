@@ -1,5 +1,6 @@
 package co.simplon.wishmegift.entity;
 
+import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -14,21 +15,29 @@ public class List {
     private UUID id;
 
     @Basic
-    @Column(name="name", length = 50)
+    @Nonnull
+    @Column(name="name", length = 50, nullable = false)
     private String name;
 
     @Basic
-    @Column(name="theme")
+    @Nonnull
+    @Column(name="theme", nullable = false)
     @Enumerated(EnumType.STRING)
     private Theme theme;
 
     @Basic
-    @Column(name="description", columnDefinition = "text")
+    @Column(name="description", columnDefinition = "text", nullable = true)
     private String description;
 
     @Basic
-    @Column(name="date")
+    @Nonnull
+    @Column(name="date", nullable = false)
     private java.sql.Time CreatedAt;
+
+    @Basic
+    @Nonnull
+    @Column(name="event_date", nullable = false)
+    private java.sql.Time EventDate;
 
     @Basic
     @Column(name="is_active", columnDefinition = "boolean default true")
@@ -64,6 +73,14 @@ public class List {
 
     public Date getCreatedAt() {
         return this.CreatedAt;
+    }
+
+    public Date getEventDate() {
+        return this.EventDate;
+    }
+
+    public void setEventDate(java.sql.Time eventDate) {
+        this.EventDate = eventDate;
     }
 
     public Boolean isActive() {
