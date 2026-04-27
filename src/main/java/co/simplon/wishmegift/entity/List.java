@@ -2,6 +2,8 @@ package co.simplon.wishmegift.entity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.CreatedDate;
 
 import java.util.Date;
 import java.util.UUID;
@@ -31,6 +33,7 @@ public class List {
 
     @Basic
     @Nonnull
+    @CreatedDate
     @Column(name="date", nullable = false)
     private java.sql.Time CreatedAt;
 
