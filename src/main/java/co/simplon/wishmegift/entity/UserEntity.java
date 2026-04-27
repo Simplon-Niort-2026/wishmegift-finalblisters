@@ -9,7 +9,7 @@ import java.util.UUID;
 
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class UserEntity {
 
     @Id
@@ -18,7 +18,7 @@ public class UserEntity {
 
     @Basic
     @Nonnull
-    @Column(nullable = false, unique=true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Basic
@@ -26,7 +26,8 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    public UserEntity() {}
+    public UserEntity() {
+    }
 
 
     public String getEmail() {
@@ -34,9 +35,9 @@ public class UserEntity {
     }
 
     public void setEmail(String email) {
-        if(RegexService.isValidEmail(email)) {
+        if (RegexService.isValidEmail(email)) {
             this.email = email;
-        }else{
+        } else {
             throw new RuntimeException("Email invalide.");
         }
     }
@@ -54,9 +55,9 @@ public class UserEntity {
     }
 
     public void setPassword(String password) {
-        if(RegexService.isValidPassword(password)) {
+        if (RegexService.isValidPassword(password)) {
             this.password = HasherService.hash(password);
-        }else{
+        } else {
             throw new RuntimeException("Password invalide. Minimum 12 caractères comprenant des majuscules, des minuscules, des chiffres et des caractères spéciaux");
         }
 

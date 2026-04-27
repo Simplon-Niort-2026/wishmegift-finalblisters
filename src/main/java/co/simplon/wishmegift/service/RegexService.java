@@ -14,7 +14,10 @@ public class RegexService {
     private static final Pattern emailPattern = Pattern.compile(emailRegex);
 
     public static boolean isValidPassword(String password) {
-        if(password == null) return false;
+        if (password == null){
+            return false;
+        }
+
         Matcher matcher = passwordPattern.matcher(password);
         return matcher.matches();
     }
