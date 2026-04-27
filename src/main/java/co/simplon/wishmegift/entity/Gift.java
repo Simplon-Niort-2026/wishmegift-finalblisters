@@ -69,7 +69,7 @@ public class Gift {
     }
 
     public void setDesire_level(Integer desire_level) {
-        if(desire_level < 0 || desire_level > 6) {
+        if(desire_level < 0 || desire_level > 5) {
             throw new IllegalArgumentException("Desire level must be between 1 and 5");
         }
         this.desire_level = desire_level;
