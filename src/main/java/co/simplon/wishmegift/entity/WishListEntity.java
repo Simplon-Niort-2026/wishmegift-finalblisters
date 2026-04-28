@@ -6,7 +6,9 @@ import org.jspecify.annotations.NonNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -47,6 +49,14 @@ public class WishListEntity {
     @Basic
     @Column(name="is_active", columnDefinition = "boolean default true")
     private Boolean active = true;
+
+    @OneToMany
+    private List<GiftEntity> gifts = new ArrayList<>();
+
+    @ManyToMany(mappedBy="wishlistsShared")
+    private List<UserEntity> users = new ArrayList<>();
+
+    public WishListEntity() {}
 
     public UUID getId() {
         return id;
