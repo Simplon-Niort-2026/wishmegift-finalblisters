@@ -38,8 +38,9 @@ public class Gift {
     @Column(name = "reserved", columnDefinition = "false")
     private Boolean reserved = false;
 
-    @Column(name = "reservedBy", nullable = true)
-    private UUID reservedBy;
+//    Ligne à décomenter lorsque la table User sera accessible
+//    @Column(name = "reserved_by", nullable = true)
+//    private UUID reservedBy;
 
     @Column
     @Nonnull
