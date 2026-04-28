@@ -15,6 +15,7 @@ public class GiftEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="gift_id")
     private UUID id;
 
     @Column(name = "name", length = 50, nullable = false)
@@ -39,8 +40,8 @@ public class GiftEntity {
     @Column(name = "reserved", columnDefinition = " Boolean default false")
     private Boolean reserved = false;
 
-    @Column(name = "reserved_by", nullable = true)
-    private UUID reservedBy;
+    @ManyToOne
+    private UserEntity userWhoHaveReserved ;
 
     @Column
     @Nonnull
@@ -116,13 +117,10 @@ public class GiftEntity {
         this.reserved = reserved;
     }
 
-    public UUID getReservedBy() {
-        return reservedBy;
+    public UserEntity getUserWhoHaveReserved() {
+        return userWhoHaveReserved;
     }
 
-    public void setReservedBy(UUID reservedBy) {
-        this.reservedBy = reservedBy;
-    }
 
     @Nonnull
     public LocalDateTime getCreatedAt() {

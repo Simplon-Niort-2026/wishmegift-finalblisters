@@ -18,6 +18,7 @@ public class WishListEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="wish_list_id")
     private UUID id;
 
     @Basic

@@ -16,6 +16,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="user_id")
     private UUID id;
 
     @Basic
