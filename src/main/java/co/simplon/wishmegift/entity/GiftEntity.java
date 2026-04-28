@@ -6,14 +6,16 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
 @Table(name = "gift")
-public class Gift {
+public class GiftEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="gift_id")
     private UUID id;
 
     @Column(name = "name", length = 50, nullable = false)
@@ -35,12 +37,11 @@ public class Gift {
     @Nonnull
     private Float price;
 
-    @Column(name = "reserved", columnDefinition = "false")
+    @Column(name = "reserved", columnDefinition = " Boolean default false")
     private Boolean reserved = false;
 
-//    Ligne à décomenter lorsque la table User sera accessible
-//    @Column(name = "reserved_by", nullable = true)
-//    private UUID reservedBy;
+    @ManyToOne
+    private UserEntity userWhoHaveReserved ;
 
     @Column
     @Nonnull
@@ -52,7 +53,9 @@ public class Gift {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    public Gift() {
+
+
+    public GiftEntity() {
     }
 
     public UUID getId() {
@@ -114,13 +117,10 @@ public class Gift {
         this.reserved = reserved;
     }
 
-    public UUID getReservedBy() {
-        return reservedBy;
+    public UserEntity getUserWhoHaveReserved() {
+        return userWhoHaveReserved;
     }
 
-    public void setReservedBy(UUID reservedBy) {
-        this.reservedBy = reservedBy;
-    }
 
     @Nonnull
     public LocalDateTime getCreatedAt() {

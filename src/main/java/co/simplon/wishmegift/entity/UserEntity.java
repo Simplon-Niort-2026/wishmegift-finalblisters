@@ -5,6 +5,8 @@ import co.simplon.wishmegift.service.RegexService;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -14,6 +16,7 @@ public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name="user_id")
     private UUID id;
 
     @Basic
@@ -25,6 +28,16 @@ public class UserEntity {
     @Nonnull
     @Column(nullable = false)
     private String password;
+
+    @OneToMany
+    private List<WishListEntity> whishlists = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name="share",
+            joinColumns = @JoinColumn(name="users_id"),
+            inverseJoinColumns = @JoinColumn(name="wish_list_id")
+    )
+    private List<WishListEntity> wishlistsShared = new ArrayList<>();
 
     public UserEntity() {
     }
