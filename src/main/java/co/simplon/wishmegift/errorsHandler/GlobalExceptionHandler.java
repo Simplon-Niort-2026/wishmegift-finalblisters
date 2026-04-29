@@ -48,14 +48,18 @@ public class GlobalExceptionHandler {
         String[] messageUtilSplitted = messageSplitted[1].split("]");
         System.err.println("partie 1 du second split");
         String messageUtil = messageUtilSplitted[0].trim();
-        System.err.println(messageUtil);
+        System.err.println(messageUtil);*/
         String message = ex.getMessage();
-        String regex = "La clé(.*)]";
+        String regex = "« (.*?) » existe déjà";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(message);
         if(matcher.find()) {
-            System.err.println(matcher.group(1));
-        }*/
-        return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            String resultat = matcher.group(1) + " » existe déjà.";
+            System.out.println(resultat);
+            return new ResponseEntity<>(resultat, HttpStatus.INTERNAL_SERVER_ERROR);
+        }else{
+            return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }
