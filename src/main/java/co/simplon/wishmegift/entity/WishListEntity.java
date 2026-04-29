@@ -1,15 +1,21 @@
 package co.simplon.wishmegift.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.jspecify.annotations.NonNull;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+
+import static jakarta.persistence.CascadeType.ALL;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -40,12 +46,13 @@ public class WishListEntity {
     @Nonnull
     @CreatedDate
     @Column(name="date", nullable = false, updatable = false)
-    private java.sql.Time createdAt;
+    private LocalDateTime createdAt;
 
     @Basic
     @Nonnull
+    @JsonProperty("event_date")
     @Column(name="event_date", nullable = false)
-    private java.sql.Time eventDate;
+    private LocalDate eventDate;
 
     @Basic
     @Column(name="is_active", columnDefinition = "boolean default true")
@@ -56,6 +63,9 @@ public class WishListEntity {
 
     @ManyToMany(mappedBy="wishlistsShared")
     private List<UserEntity> users = new ArrayList<>();
+    
+    @ManyToOne
+    private UserEntity user;
 
     public WishListEntity() {}
 
@@ -87,15 +97,15 @@ public class WishListEntity {
         this.description = description;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return this.createdAt;
     }
 
-    public Date getEventDate() {
+    public LocalDate getEventDate() {
         return this.eventDate;
     }
 
-    public void setEventDate(java.sql.@NonNull Time eventDate) {
+    public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
 
@@ -107,4 +117,27 @@ public class WishListEntity {
         this.active = !this.active;
     }
 
+    public List<GiftEntity> getGifts() {
+        return gifts;
+    }
+
+    public void setGifts(List<GiftEntity> gifts) {
+        this.gifts = gifts;
+    }
+
+    public List<UserEntity> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserEntity> users) {
+        this.users = users;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
 }
