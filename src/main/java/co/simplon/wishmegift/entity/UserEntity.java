@@ -67,7 +67,7 @@ public class UserEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(String password) throws RuntimeException {
         if (RegexService.isValidPassword(password)) {
             this.password = HasherService.hash(password);
         } else {
