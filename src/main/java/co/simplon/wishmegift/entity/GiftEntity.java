@@ -4,12 +4,14 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "gift")
 public class GiftEntity {
 
@@ -40,9 +42,6 @@ public class GiftEntity {
     @Column(name = "reserved", columnDefinition = " Boolean default false")
     private Boolean reserved = false;
 
-    @ManyToOne
-    private UserEntity userWhoHaveReserved ;
-
     @Column
     @Nonnull
     @CreatedDate
@@ -53,9 +52,20 @@ public class GiftEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @OneToOne
+    private WishListEntity wishList;
 
+    @ManyToOne
+    private UserEntity userWhoHaveReserved ;
 
     public GiftEntity() {
+    }
+
+    public GiftEntity(@Nonnull Integer desire_level, @Nonnull String link, @Nonnull String name, @Nonnull Float price) {
+        this.desire_level = desire_level;
+        this.link = link;
+        this.name = name;
+        this.price = price;
     }
 
     public UUID getId() {
@@ -92,12 +102,30 @@ public class GiftEntity {
         return desire_level;
     }
 
+    @Override
+    public String toString() {
+        return "GiftEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", link='" + link + '\'' +
+                ", desire_level=" + desire_level +
+                ", price=" + price +
+                ", reserved=" + reserved +
+                ", userWhoHaveReserved=" + userWhoHaveReserved +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
     @Nonnull
     public void setDesire_level(Integer desire_level) {
         if(desire_level < 0 || desire_level > 5) {
             throw new IllegalArgumentException("Desire level must be between 1 and 5");
         }
         this.desire_level = desire_level;
+
+
     }
 
     @Nonnull

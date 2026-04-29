@@ -13,8 +13,11 @@ public class GiftService {
     @Autowired
     private GiftRepository giftRepository;
 
-    public GiftEntity addGift(GiftEntity gift) {
-        return giftRepository.save(gift);
+    public List<GiftEntity> getAllGifts() {
+        return giftRepository.findAll();
     }
 
+    public GiftEntity createGift(GiftEntity gift) {
+        return giftRepository.save(gift);
+    }
 }
