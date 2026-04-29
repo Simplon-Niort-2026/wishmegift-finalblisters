@@ -18,7 +18,7 @@ public class WishListService {
 
 //        dans la requete post de creation de la wishlist il faudra lui fournir l'id de l'utilisateur
         WishListEntity wishListEntitysaved = wishListRepository.save(wishListEntity);
-        wishListEntitysaved.setUser(wishListEntitysaved.getUser());
+     
 
         return wishListEntitysaved;
     }
