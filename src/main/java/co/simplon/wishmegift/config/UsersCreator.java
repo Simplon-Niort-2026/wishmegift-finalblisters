@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class usersCreator implements CommandLineRunner {
+public class UsersCreator implements CommandLineRunner {
 
     @Autowired
     UserRepository userRepository;
@@ -17,7 +17,7 @@ public class usersCreator implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         List<UserEntity> users = userRepository.findAll();
-        if(users.isEmpty()){
+        if (users.isEmpty()) {
             UserEntity user1 = new UserEntity();
             user1.setEmail("christophe@gmail.com");
             user1.setPassword("CHpassword@1");
