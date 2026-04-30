@@ -5,13 +5,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class HasherService {
-    public static String hash(String password) {
 
+    private final String salt = BCrypt.gensalt(12);
+
+    public String hash(String password) {
+
+        /*
         // Increasing this value makes it more secure, but slower
         int logRounds = 12;
 
         // Generate the salt
-        String salt = BCrypt.gensalt(logRounds);
+        String salt = BCrypt.gensalt(logRounds);*/
 
         // Hash the password with the salt
         return BCrypt.hashpw(password, salt);
@@ -19,7 +23,7 @@ public class HasherService {
     }
 
 
-   public static boolean isGoodPassword(String mdp, String passwordHashed){
+   public boolean isGoodUserPassword(String mdp, String passwordHashed){
        return BCrypt.checkpw(mdp, passwordHashed);
     }
 

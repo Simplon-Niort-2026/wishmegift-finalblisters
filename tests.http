@@ -1,6 +1,5 @@
-### GET request to example server
-
 ### Créé un ustilisateur
+
 POST localhost:8080/users
 Content-Type: application/json
 
@@ -9,13 +8,13 @@ Content-Type: application/json
     "password": "ChPassword@1"
 }
 
-###
+
 ### Récupère un utilisateur par son email et mot de passe
 POST localhost:8080/users/user
 Content-Type: application/json
 
 {
-    "email" : "christophe@gmail.com",
+    "email" : "christopheNewEmail@gmail.com",
     "password" : "CHpassword@1"
 }
 
@@ -26,7 +25,7 @@ PUT localhost:8080/users/user
 Content-Type: application/json
 
 {
-  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "id" : "20da5de9-fa12-4221-82ef-f23b3083f070",
   "email": "christopheNewEmail@gmail.com"
 }
 
@@ -35,7 +34,7 @@ PUT localhost:8080/users/user
 Content-Type: application/json
 
 {
-  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "id" : "20da5de9-fa12-4221-82ef-f23b3083f070",
   "email": "christopheNewEmailgmail.com"
 }
 
@@ -44,8 +43,8 @@ PUT localhost:8080/users/user
 Content-Type: application/json
 
 {
-  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
-  "email": "christopheEmail@gmail.com"
+  "id" : "20da5de9-fa12-4221-82ef-f23b3083f070",
+  "email": "christopheNewEmail@gmail.com"
 }
 
 ### test du changement du password. Doit retourné l'utilisateur modifié
@@ -53,8 +52,8 @@ PUT localhost:8080/users/user
 Content-Type: application/json
 
 {
-  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
-  "password": "CHpassword@1"
+  "id" : "20da5de9-fa12-4221-82ef-f23b3083f070",
+  "password": "CHpassword@2"
 }
 
 ### test du changement d'un mauvais password. Doit retourné 'Password invalide'
@@ -62,7 +61,7 @@ PUT localhost:8080/users/user
 Content-Type: application/json
 
 {
-  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "id" : "20da5de9-fa12-4221-82ef-f23b3083f070",
   "password": "CHpassword@"
 }
 
@@ -72,7 +71,24 @@ PUT localhost:8080/users/user
 Content-Type: application/json
 
 {
-  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "id" : "20da5de9-fa12-4221-82ef-f23b3083f070",
   "email" : "christopheNewEmailAndPassword@gmail.com",
   "password": "CHpassword@2"
+}
+
+
+### test de la suppresion d'un utilisateur. Doit retourné 'utilisateur supprimé.'
+DELETE localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id": "20da5de9-fa12-4221-82ef-f23b3083f070"
+}
+
+### test de la suppresion d'un utilisateur non valide. Doit retourné 'Id invalide.'
+DELETE localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id": "c23a126b-1811-404b-b0cb-7a5eeb8cd1a1"
 }

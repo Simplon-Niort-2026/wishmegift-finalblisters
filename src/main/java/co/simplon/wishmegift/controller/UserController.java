@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.DefaultHandlerExceptionResolver;
 
 @RestController
 @RequestMapping("/users")
@@ -34,5 +33,11 @@ public class UserController {
     @PutMapping("/user")
     public UserEntity update(@RequestBody UserEntity user) {
     return userService.update(user);
+    }
+
+    @DeleteMapping("/user")
+    public ResponseEntity<@NonNull Object> delete(@RequestBody UserEntity user) {
+        userService.delete(user);
+        return new ResponseEntity<>("utilisateur supprimé.", HttpStatus.OK);
     }
 }
