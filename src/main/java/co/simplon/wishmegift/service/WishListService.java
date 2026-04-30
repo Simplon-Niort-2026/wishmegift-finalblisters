@@ -17,8 +17,7 @@ public class WishListService {
     private WishListEntity wishListEntity;
 
     public WishListEntity saveWishList(WishListEntity wishListEntity) {
-        WishListEntity wishListEntitysaved = wishListRepository.save(wishListEntity);
-             return wishListEntitysaved;
+        return wishListRepository.save(wishListEntity);
     }
     public Optional<WishListEntity> getWishList(@PathVariable UUID id) {return wishListRepository.findById(id);}
 
