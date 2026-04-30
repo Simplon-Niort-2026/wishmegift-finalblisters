@@ -1,6 +1,7 @@
 package co.simplon.wishmegift.entity;
 
-import co.simplon.wishmegift.service.HasherService;
+
+import co.simplon.wishmegift.errorsHandler.BadRequestException;
 import co.simplon.wishmegift.service.RegexService;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
@@ -51,7 +52,7 @@ public class UserEntity {
         if (RegexService.isValidEmail(email)) {
             this.email = email;
         } else {
-            throw new RuntimeException("Email invalide.");
+            throw new BadRequestException("Email invalide.");
         }
     }
 
@@ -67,12 +68,8 @@ public class UserEntity {
         return password;
     }
 
-    public void setPassword(String password) throws RuntimeException {
-        if (RegexService.isValidPassword(password)) {
-            this.password = HasherService.hash(password);
-        } else {
-            throw new RuntimeException("Password invalide. Minimum 12 caractères comprenant des majuscules, des minuscules, des chiffres et des caractères spéciaux");
-        }
+    public void setPassword(String password)  {
+        this.password = password;
 
 
     }
