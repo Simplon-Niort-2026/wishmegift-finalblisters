@@ -25,11 +25,6 @@ public class UserController {
          return new ResponseEntity<>(userCreated, HttpStatus.CREATED);
     }
 
-    /*@GetMapping("/email/{email}")
-    public UserEntity find(@PathVariable("email") String email) {
-        return user;
-    }*/
-
 
     @PostMapping("/user")
     public UserEntity find(@RequestBody UserEntity user) {
