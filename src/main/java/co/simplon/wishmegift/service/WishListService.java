@@ -21,4 +21,7 @@ public class WishListService {
     }
     public Optional<WishListEntity> getWishList(@PathVariable UUID id) {return wishListRepository.findById(id);}
 
+    public void deleteWishListById(@PathVariable UUID id) {
+        wishListRepository.deleteById(id);
+    }
 }

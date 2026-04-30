@@ -1,0 +1,43 @@
+### Créé une liste pour un utilisateur
+POST localhost:8080/lists
+Content-Type: application/json
+
+{
+  "name" : "BBQ rodolphe",
+  "theme" : "AUTRE",
+  "description" : "2",
+  "event_date" : "2026-06-30",
+  "is_active" : "true",
+  "user" : {
+
+    "id" : "c49850e1-2df2-4fcd-b596-61421265b625"
+  }
+}
+
+
+### Modifié une liste d'un utilisateur
+PUT localhost:8080/lists/cf9f3216-9c1b-411c-bd8f-f0bb30552c31
+Content-Type: application/json
+
+{
+  "name" : "BBQ rodolphe",
+  "theme" : "AUTRE",
+  "description" : "Liste pour un kit proffesionnel de cuisson au feu de bois",
+  "event_date" : "2026-06-15",
+  "is_active" : "true",
+  "user" : {
+
+    "id" : "c49850e1-2df2-4fcd-b596-61421265b625"
+  }
+}
+
+### lire une liste d'un utlisateur
+GET localhost:8080/lists/cf9f3216-9c1b-411c-bd8f-f0bb30552c31
+Content-Type: application/json
+
+{
+  "id" : "77b03bcd-7900-48f1-835b-48ead5b1bcd2"
+}
+
+### Suprimer une liste d'un utilisateur
+DELETE localhost:8080/lists/cf9f3216-9c1b-411c-bd8f-f0bb30552c31
