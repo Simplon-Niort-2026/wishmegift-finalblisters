@@ -27,15 +27,18 @@ public class WishListController {
         this.wishListService = wishListService;
     }
 
-    //    POST /lists/user/{userId}
     @PostMapping("")
     public WishListEntity saveWishList(@RequestBody WishListEntity wishListEntity) {
         return wishListService.saveWishList(wishListEntity);
     }
 
     //    GET /lists/{listId}/user/{userId}
+    @GetMapping("/{listId}")
+    public Optional<WishListEntity> getWishList(@PathVariable UUID listId) {
+        return wishListService.getWishList(listId);
+    }
 //    GET /lists/user/{userId}
-//    PUT /lists/{listId}/user/{userId}
+
     @PutMapping("{listId}")
     public WishListEntity updateWishList(@PathVariable UUID listId, @RequestBody WishListEntity wishListEntity) {
 
