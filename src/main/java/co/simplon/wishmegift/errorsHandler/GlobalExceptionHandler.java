@@ -36,19 +36,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<@NonNull String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
 
-        /* JE GARDE POUR ESSAYER DE RECUPERER LA PARTIE UTIL DU MESSAGE PLUS TARD
-
-        String message = ex.getMessage();
-        System.err.println("message");
-        System.err.println(message);
-        String[] messageSplitted = message.split("Détail : La clé ");
-        System.err.println("premier split");
-        System.err.println(messageSplitted[0]);
-        System.err.println(messageSplitted[1]);
-        String[] messageUtilSplitted = messageSplitted[1].split("]");
-        System.err.println("partie 1 du second split");
-        String messageUtil = messageUtilSplitted[0].trim();
-        System.err.println(messageUtil);*/
         String message = ex.getMessage();
         String regex = "« (.*?) » existe déjà";
         Pattern pattern = Pattern.compile(regex);
@@ -61,5 +48,10 @@ public class GlobalExceptionHandler {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
+    }
+
+    @ExceptionHandler(WishListNotFoundException.class)
+    public ResponseEntity<String> handleWishListNotFound(WishListNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

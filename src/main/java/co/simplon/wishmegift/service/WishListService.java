@@ -4,7 +4,9 @@ import co.simplon.wishmegift.entity.WishListEntity;
 import co.simplon.wishmegift.repository.WishListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -15,11 +17,9 @@ public class WishListService {
     private WishListEntity wishListEntity;
 
     public WishListEntity saveWishList(WishListEntity wishListEntity) {
-
-//        dans la requete post de creation de la wishlist il faudra lui fournir l'id de l'utilisateur
         WishListEntity wishListEntitysaved = wishListRepository.save(wishListEntity);
-     
-
-        return wishListEntitysaved;
+             return wishListEntitysaved;
     }
+    public Optional<WishListEntity> getWishList(@PathVariable UUID id) {return wishListRepository.findById(id);}
+
 }
