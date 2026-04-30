@@ -36,6 +36,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<@NonNull String> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
 
+
         String message = ex.getMessage();
         String regex = "« (.*?) » existe déjà";
         Pattern pattern = Pattern.compile(regex);
@@ -53,5 +54,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(WishListNotFoundException.class)
     public ResponseEntity<String> handleWishListNotFound(WishListNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+      
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<@NonNull String> handleBadRequestException(BadRequestException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

@@ -1,4 +1,6 @@
 ### GET request to example server
+
+### Créé un ustilisateur
 POST localhost:8080/users
 Content-Type: application/json
 
@@ -8,3 +10,13 @@ Content-Type: application/json
 }
 
 ###
+### Récupère un utilisateur par son email et mot de passe
+POST localhost:8080/users/user
+Content-Type: application/json
+
+{
+    "email" : "christophe@gmail.com",
+    "password" : "CHpassword@1"
+}
+
+
