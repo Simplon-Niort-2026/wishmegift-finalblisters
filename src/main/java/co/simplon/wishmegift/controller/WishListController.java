@@ -32,7 +32,6 @@ public class WishListController {
         return wishListService.saveWishList(wishListEntity);
     }
 
-    //    GET /lists/{listId}/user/{userId}
     @GetMapping("/{listId}")
     public Optional<WishListEntity> getWishList(@PathVariable UUID listId) {
         return wishListService.getWishList(listId);
@@ -79,13 +78,18 @@ public class WishListController {
         if (gifts != null) {
             currentWishList.setGifts(gifts);
         }
-//            users
+
         List<UserEntity> users = wishListEntity.getUsers();
         if (users != null) {
             currentWishList.setUsers(users);
         }
         return wishListService.saveWishList(currentWishList);
 
-//    DELETE /lists/{listId}/user/{userId}
     }
+
+    @DeleteMapping("/{listId}")
+    public void deleteWishList(@PathVariable UUID listId) {
+        wishListService.deleteWishListById(listId);
+    }
+
 }
