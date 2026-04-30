@@ -4,12 +4,14 @@ import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "gift")
 public class GiftEntity {
 
@@ -40,9 +42,6 @@ public class GiftEntity {
     @Column(name = "reserved", columnDefinition = " Boolean default false")
     private Boolean reserved = false;
 
-    @ManyToOne
-    private UserEntity userWhoHaveReserved ;
-
     @Column
     @Nonnull
     @CreatedDate
@@ -53,9 +52,30 @@ public class GiftEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @ManyToOne
+    @JoinColumn(name="wish_list_id")
+    private WishListEntity wishList;
 
+    @ManyToOne
+    @JoinColumn(name="user_id_reserved")
+    private UserEntity userWhoHaveReserved ;
 
     public GiftEntity() {
+    }
+
+    public GiftEntity(@Nonnull String name, @Nonnull String link, @Nonnull Float price, @Nonnull Integer desire_level) {
+        this.name = name;
+        this.link = link;
+        this.price = price;
+        this.desire_level = desire_level;
+    }
+
+    public GiftEntity(@Nonnull String name, @Nonnull String link, @Nonnull Float price, @Nonnull Integer desire_level, WishListEntity wishList) {
+        this.name = name;
+        this.link = link;
+        this.price = price;
+        this.desire_level = desire_level;
+        this.wishList = wishList;
     }
 
     public UUID getId() {
@@ -92,6 +112,22 @@ public class GiftEntity {
         return desire_level;
     }
 
+    @Override
+    public String toString() {
+        return "GiftEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", link='" + link + '\'' +
+                ", desire_level=" + desire_level +
+                ", price=" + price +
+                ", reserved=" + reserved +
+                ", userWhoHaveReserved=" + userWhoHaveReserved +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
+
     @Nonnull
     public void setDesire_level(Integer desire_level) {
         if(desire_level < 0 || desire_level > 5) {
@@ -121,6 +157,17 @@ public class GiftEntity {
         return userWhoHaveReserved;
     }
 
+    public WishListEntity getWishList() {
+        return wishList;
+    }
+
+    public void setWishList(WishListEntity wishList) {
+        this.wishList = wishList;
+    }
+
+    public void setUserWhoHaveReserved(UserEntity userWhoHaveReserved) {
+        this.userWhoHaveReserved = userWhoHaveReserved;
+    }
 
     @Nonnull
     public LocalDateTime getCreatedAt() {
