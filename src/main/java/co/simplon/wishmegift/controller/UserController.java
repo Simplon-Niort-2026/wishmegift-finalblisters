@@ -30,4 +30,9 @@ public class UserController {
     public UserEntity find(@RequestBody UserEntity user) {
         return userService.find(user);
     }
+
+    @PutMapping("/user")
+    public UserEntity update(@RequestBody UserEntity user) {
+    return userService.update(user);
+    }
 }

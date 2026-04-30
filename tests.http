@@ -20,3 +20,59 @@ Content-Type: application/json
 }
 
 
+
+### test du changement de l'email. Doit retourner l'utilisateur modifié
+PUT localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "email": "christopheNewEmail@gmail.com"
+}
+
+### test du changement d'un email invalide. Doit retourner 'Email invalide.'
+PUT localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "email": "christopheNewEmailgmail.com"
+}
+
+### test du changement d'un email qui existe déjà. Doit retourner 'Email déjà utilisée.'
+PUT localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "email": "christopheEmail@gmail.com"
+}
+
+### test du changement du password. Doit retourné l'utilisateur modifié
+PUT localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "password": "CHpassword@1"
+}
+
+### test du changement d'un mauvais password. Doit retourné 'Password invalide'
+PUT localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "password": "CHpassword@"
+}
+
+
+### test du changement de l'email et du password. Doit retourné l'utilisateur modifié
+PUT localhost:8080/users/user
+Content-Type: application/json
+
+{
+  "id" : "7bb1c19f-431b-48a7-ba0f-e77af7b01745",
+  "email" : "christopheNewEmailAndPassword@gmail.com",
+  "password": "CHpassword@2"
+}
