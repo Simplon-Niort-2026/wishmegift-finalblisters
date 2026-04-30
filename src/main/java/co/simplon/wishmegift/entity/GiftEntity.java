@@ -52,10 +52,12 @@ public class GiftEntity {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name="wish_list_id")
     private WishListEntity wishList;
 
     @ManyToOne
+    @JoinColumn(name="user_id_reserved")
     private UserEntity userWhoHaveReserved ;
 
     public GiftEntity() {
@@ -66,6 +68,14 @@ public class GiftEntity {
         this.link = link;
         this.name = name;
         this.price = price;
+    }
+
+    public GiftEntity(@Nonnull String name, @Nonnull String link, @Nonnull Float price, @Nonnull Integer desire_level, WishListEntity wishList) {
+        this.name = name;
+        this.link = link;
+        this.price = price;
+        this.desire_level = desire_level;
+        this.wishList = wishList;
     }
 
     public UUID getId() {
@@ -124,8 +134,6 @@ public class GiftEntity {
             throw new IllegalArgumentException("Desire level must be between 1 and 5");
         }
         this.desire_level = desire_level;
-
-
     }
 
     @Nonnull
@@ -149,6 +157,17 @@ public class GiftEntity {
         return userWhoHaveReserved;
     }
 
+    public WishListEntity getWishList() {
+        return wishList;
+    }
+
+    public void setWishList(WishListEntity wishList) {
+        this.wishList = wishList;
+    }
+
+    public void setUserWhoHaveReserved(UserEntity userWhoHaveReserved) {
+        this.userWhoHaveReserved = userWhoHaveReserved;
+    }
 
     @Nonnull
     public LocalDateTime getCreatedAt() {

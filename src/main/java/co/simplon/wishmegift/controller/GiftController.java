@@ -26,9 +26,9 @@ public class GiftController {
 
     @GetMapping("/allgifts")
     public List<GiftEntity> getAllGifts() {
-       if (giftRepository.findAll() == null) {
-           throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exterminé !");
-       }
+        if (giftRepository.findAll() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exterminé !");
+        }
         return giftService.getAllGifts();
     }
 

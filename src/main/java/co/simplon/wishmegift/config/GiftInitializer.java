@@ -16,11 +16,11 @@ public class GiftInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        GiftEntity gift1 = new GiftEntity(1, "http://www.mon-lien.fr", "Mon beau cadeau", 9.99F);
+        // GiftEntity gift1 = new GiftEntity(1, "http://www.mon-lien.fr", "Mon beau cadeau", 9.99F);
 
-        GiftEntity giftCreated = this.giftRepository.save(gift1);
+        // GiftEntity giftCreated = this.giftRepository.save(gift1);
 
-        System.out.print(giftCreated);
+        //System.out.print(giftCreated);
     }
 
 }
