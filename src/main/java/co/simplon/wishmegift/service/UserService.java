@@ -16,10 +16,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private HasherService hasherService;
+
     public UserEntity save(UserEntity user) {
         String password = user.getPassword();
         if (RegexService.isValidPassword(password)) {
-            String passwordHashed = HasherService.hash(password);
+            String passwordHashed = hasherService.hash(password);
             user.setPassword(passwordHashed);
             return userRepository.save(user);
         } else {
@@ -37,7 +40,7 @@ public class UserService {
             throw new BadRequestException("Email invalide.");
         }
 
-        if (!HasherService.isGoodPassword(userPassword, userFound.getPassword())) {
+        if (hasherService.isGoodUserPassword(userPassword, userFound.getPassword())) {
             throw  new BadRequestException("Password invalide.");
         }
 
@@ -70,15 +73,24 @@ public class UserService {
             }
             userToUpdate.setEmail(userReceivedEmail);
         }
-        System.out.println("mot de passe reçu : "+ userReceivedPassword);
-        if (userReceivedPassword != null && !HasherService.isGoodPassword(userReceivedPassword, userToUpdatePassword)) {
+
+        if (userReceivedPassword != null ) {
             if(!RegexService.isValidPassword(userReceivedPassword)) {
                 throw  new BadRequestException("Password invalide.");
             }
 
-            userToUpdate.setPassword(HasherService.hash(userReceivedPassword));
+            userToUpdate.setPassword(hasherService.hash(userReceivedPassword));
         }
 
         return userRepository.save(userToUpdate);
+    }
+
+    public void delete(UserEntity user) {
+        UUID userId = user.getId();
+        Optional<UserEntity> userFound = userRepository.findById(userId);
+        if(userFound.isEmpty()) {
+            throw new BadRequestException("Id invalide.");
+        }
+        userRepository.delete(user);
     }
 }
