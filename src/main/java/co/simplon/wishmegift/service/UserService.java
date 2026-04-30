@@ -20,7 +20,7 @@ public class UserService {
             user.setPassword(passwordHashed);
             return userRepository.save(user);
         } else {
-            throw new RuntimeException("Password invalide. Minimum 12 caractères comprenant des majuscules, des minuscules, des chiffres et des caractères spéciaux");
+            throw new BadRequestException("Password invalide. Minimum 12 caractères comprenant des majuscules, des minuscules, des chiffres et des caractères spéciaux");
         }
 
     }
