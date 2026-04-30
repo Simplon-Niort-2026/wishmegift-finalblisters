@@ -63,11 +63,11 @@ public class GiftEntity {
     public GiftEntity() {
     }
 
-    public GiftEntity(@Nonnull Integer desire_level, @Nonnull String link, @Nonnull String name, @Nonnull Float price) {
-        this.desire_level = desire_level;
-        this.link = link;
+    public GiftEntity(@Nonnull String name, @Nonnull String link, @Nonnull Float price, @Nonnull Integer desire_level) {
         this.name = name;
+        this.link = link;
         this.price = price;
+        this.desire_level = desire_level;
     }
 
     public GiftEntity(@Nonnull String name, @Nonnull String link, @Nonnull Float price, @Nonnull Integer desire_level, WishListEntity wishList) {

@@ -24,10 +24,10 @@ public class GiftController {
         this.giftRepository = giftRepository;
     }
 
-    @GetMapping("/allgifts")
+    @GetMapping("")
     public List<GiftEntity> getAllGifts() {
         if (giftRepository.findAll() == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Exterminé !");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Pas de cadeaux enregistrés");
         }
         return giftService.getAllGifts();
     }
