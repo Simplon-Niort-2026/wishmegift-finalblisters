@@ -54,7 +54,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(WishListNotFoundException.class)
     public ResponseEntity<String> handleWishListNotFound(WishListNotFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
-      
+    }
+    
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<@NonNull String> handleBadRequestException(BadRequestException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
